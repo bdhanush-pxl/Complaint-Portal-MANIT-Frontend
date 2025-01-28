@@ -9,14 +9,15 @@ import AdminDashboard from "./pages/admins/AdminDashboard.tsx";
 import AdminManageComplaints from "./pages/admins/AdminManageComplaints";
 import ComplaintListWithErrorBoundary from './pages/students/ComplaintListWithErrorBoundary';
 import ComplaintListAdmin from './pages/admins/ComplaintListAdmin.tsx'
+import MedicalAdminDashboard from "./pages/admins/medicalAdmin/MedicalAdminDashboard";
 import Feedback from "./pages/students/Feedback.tsx";
 import Utils from "./pages/admins/Util.tsx";
 import { useAuth } from "./context/AuthContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';  // Add this import
-import './customToast.css'; // Import custom toast styles
+import 'react-toastify/dist/ReactToastify.css';  
+import './customToast.css'; 
 import SearchPage from "./pages/students/Search.tsx";
 import Contacts from "./pages/students/Contacts.tsx";
 
@@ -141,6 +142,40 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+
+          {/* Medical Admin Routes */}
+          <Route
+            path="/medical-admin/dashboard"
+            element={
+              <ProtectedRoute role="medical_admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/medical-admin/complaints"
+            element={
+              <ProtectedRoute role="medical_admin">
+                <MedicalComplaintList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/medical-admin/complaints/:category"
+            element={
+              <ProtectedRoute role="medical_admin">
+                <MedicalComplaintList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/medical-admin/utils"
+            element={
+              <ProtectedRoute role="medical_admin">
+                <Utils />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         <Route path="/*" element={<CatchAllRoutes />} />
@@ -170,6 +205,8 @@ const RedirectBasedOnRole = () => {
         navigate('/student/home', { replace: true });
       } else if (auth?.role === "admin") {
         navigate('/admin/complaints', { replace: true });
+      } else if (auth?.role === "medical_admin") {
+        navigate('/medical-admin/complaints/medical', { replace: true });
       }
     }
   }, [auth, isLoading, navigate]);
