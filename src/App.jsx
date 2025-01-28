@@ -9,8 +9,8 @@ import AdminDashboard from "./pages/admins/AdminDashboard.tsx";
 import AdminManageComplaints from "./pages/admins/AdminManageComplaints";
 import ComplaintListWithErrorBoundary from './pages/students/ComplaintListWithErrorBoundary';
 import ComplaintListAdmin from './pages/admins/ComplaintListAdmin.tsx'
-import MedicalAdminDashboard from "./pages/admins/medicalAdmin/MedicalAdminDashboard";
 import Feedback from "./pages/students/Feedback.tsx";
+import MedicalComplaintList from "./pages/admins/medicalAdmin/MedicalComplaintList.tsx";
 import Utils from "./pages/admins/Util.tsx";
 import { useAuth } from "./context/AuthContext";
 import { useEffect } from "react";
